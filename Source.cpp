@@ -12,6 +12,10 @@ using namespace std;
 
 ifstream file;
 
+
+int IP = 0;
+int bitsRead = 0;
+
 //enum {		// test for segment override (only ever applies to EAC calc)
 //	NO_SEG_OV = 0,
 //	SS = 1,
@@ -291,8 +295,14 @@ int main()
 	//std::chrono::duration<double, std::milli> ms_double = t2 - t1;
 	//std::cout << ms_double.count() << "ms\n";
 
-	int byte = readNumBits(8);
-	printInstruction(byte);
+	for (int i = 0; i < 5; ++i) {
+		int byte = readNumBits(8);
+		cout << IP << ": ";
+		printInstruction(byte);
+	}
+
+	/*int byte = readNumBits(8);
+	printInstruction(byte);*/
 
 
 	return 0;
@@ -714,7 +724,7 @@ string immedOperands(int W)
 string shortLabel()
 {
 	int data = readNumBits(8);
-	return 
+	return "hi";
 }
 //string regMemOperands(int W, int D, int segOverride)
 //{
@@ -1149,8 +1159,15 @@ int readNumBits(int num)
 			++counter;
 		}
 
-		else
+		else {
+			bitsRead += num;
+			if (bitsRead % 8 == 0) {
+				++IP;
+				bitsRead = 0;
+			}
+			//cout << "reading num bits: " << num << endl;
 			return bits;
+		}
 	}
 
 	cout << "file not good! readNumBits()" << endl;
