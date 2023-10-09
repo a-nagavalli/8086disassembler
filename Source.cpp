@@ -724,7 +724,10 @@ string immedOperands(int W)
 string shortLabel()
 {
 	int data = readNumBits(8);
-	return "hi";
+	if (data >> 7) {	// sing bit is positive
+		
+	}
+	return intToHexStr(data + IP, 8);
 }
 //string regMemOperands(int W, int D, int segOverride)
 //{
@@ -1161,7 +1164,7 @@ int readNumBits(int num)
 
 		else {
 			bitsRead += num;
-			if (bitsRead % 8 == 0) {
+			if (bitsRead % 8 == 0 && bitsRead != 0) {
 				++IP;
 				bitsRead = 0;
 			}
