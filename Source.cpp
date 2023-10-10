@@ -50,6 +50,7 @@ enum opModes {
 	IMMED8,
 	IMMED16,
 	SHORT_LABEL,
+	MULTI_IMMED8,
 
 
 	SS,
@@ -201,6 +202,8 @@ const Instruction instrs[256] {
 	{"JNL\t", SHORT_LABEL},
 	{"JLE\t", SHORT_LABEL},
 	{"JNLE\t", SHORT_LABEL},
+	{"ADD\t", MULTI_IMMED8},
+
 };
 
 
@@ -277,6 +280,8 @@ void printInstruction(int byte, int segOverride)
 		case SHORT_LABEL:
 			cout << instr.data << shortLabel() << endl;
 			break;
+		case MULTI_IMMED8:
+			cout << instr.data << 
 	}
 }
 
