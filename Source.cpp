@@ -186,7 +186,21 @@ const Instruction instrs[256] {
 	{"**NOT USED**", NO_OP_ENC},
 	{"**NOT USED**", NO_OP_ENC},
 	{"JO\t", SHORT_LABEL},
-
+	{"JNO\t", SHORT_LABEL},
+	{"JB\t", SHORT_LABEL},
+	{"JNB\t", SHORT_LABEL},
+	{"JE\t", SHORT_LABEL},
+	{"JNE\t", SHORT_LABEL},
+	{"JBE\t", SHORT_LABEL},
+	{"JNBE\t", SHORT_LABEL},
+	{"JS\t", SHORT_LABEL},
+	{"JNS\t", SHORT_LABEL},
+	{"JP\t", SHORT_LABEL},
+	{"JNP\t", SHORT_LABEL},
+	{"JL\t", SHORT_LABEL},
+	{"JNL\t", SHORT_LABEL},
+	{"JLE\t", SHORT_LABEL},
+	{"JNLE\t", SHORT_LABEL},
 };
 
 
@@ -295,15 +309,14 @@ int main()
 	//std::chrono::duration<double, std::milli> ms_double = t2 - t1;
 	//std::cout << ms_double.count() << "ms\n";
 
-	for (int i = 0; i < 5; ++i) {
+	/*for (int i = 0; i < 5; ++i) {
 		int byte = readNumBits(8);
 		cout << IP << ": ";
 		printInstruction(byte);
-	}
+	}*/
 
-	/*int byte = readNumBits(8);
-	printInstruction(byte);*/
-
+	int byte = readNumBits(8);
+	printInstruction(byte);
 
 	return 0;
 }
@@ -723,11 +736,22 @@ string immedOperands(int W)
 
 string shortLabel()
 {
+	int num = 0;
+	int mask = 1;
 	int data = readNumBits(8);
-	if (data >> 7) {	// sing bit is positive
-		
+
+	if (!(data >> 7)) {	// sign bit is positive
+		num = data;
 	}
-	return intToHexStr(data + IP, 8);
+	else {	// get 2's complement signed (negative) value
+		for (int i = 0; i < 7; ++i) {	// extract seven rightmost bits
+			num += (data & mask);
+			mask <<= 1;
+		}
+		num -= 128;
+	}
+
+	return intToHexStr(num + IP + 2, 16);		// add an extra two to account for the IP moving past this instruction as well
 }
 //string regMemOperands(int W, int D, int segOverride)
 //{
