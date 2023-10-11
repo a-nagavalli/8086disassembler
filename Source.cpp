@@ -27,16 +27,19 @@ int bitsRead = 0;
 // Function prototypes
 string registerLookup(int reg, int W);
 string EAClookup(int MOD, int R_M, int W, int segOverride = 0);
+string opExtendLookup(int opExtend);
 //string EAClookup(int MOD, int R_M, int W);
 //string EAClookup(int MOD, int R_M, int W = 0);
 string decodeInstr(int byte, int override/* = NO_SEG_OV*/);
 string intToHexStr(int i, int widthInBits);
 int readNumBits(int num);
+int get8bit2sComp(int rawBinary);
 
 // operand encoding
 string regMemOperands(int W, int D, int segOverride);
 string immedOperands(int W);
 string shortLabel();
+string multiImmedOperands(int opcode);
 
 void printInstruction(int byte, int segOverride = 0);
 
@@ -202,7 +205,7 @@ const Instruction instrs[256] {
 	{"JNL\t", SHORT_LABEL},
 	{"JLE\t", SHORT_LABEL},
 	{"JNLE\t", SHORT_LABEL},
-	{"ADD\t", MULTI_IMMED8},
+	{"MULTI\t", MULTI_IMMED8},
 
 };
 
@@ -281,10 +284,18 @@ void printInstruction(int byte, int segOverride)
 			cout << instr.data << shortLabel() << endl;
 			break;
 		case MULTI_IMMED8:
-			cout << instr.data << 
+			cout << instr.data << multiImmedOperands(byte) << endl;
+			break;
+
 	}
 }
 
+/*
+	NOTE: I'm not sure if I'm handling 16-bit sign extension in immedOperands()
+	correctly. Currently, I'm just reading in 16 bits and not doing any adjustments to
+	the read value. This might be fine, it might not. I recall needing to put a '+'
+	or a '-' somewhere.
+*/
 int main()
 {
 	file.open("test.txt", ios::in | ios::out);
@@ -619,6 +630,30 @@ string EAClookup(int MOD, int R_M, int W, int segOverride)
 	return "[COULDN'T FIND EAC]";
 }
 
+string opExtendLookup(int opExtend)
+{
+	switch (opExtend) {
+		case 0b000:
+			return "ADD\t";
+		case 0b001:
+			return "OR\t";
+		case 0b010:
+			return "ADC\t";
+		case 0b011:
+			return "SBB\t";
+		case 0b100:
+			return "AND\t";
+		case 0b101:
+			return "SUB\t";
+		case 0b110:
+			return "XOR\t";
+		case 0b111:
+			return "CMP\t";
+		default:
+			return "OP_EXTEND NOT RECOGNIZED: opExtendLookup()";
+	}
+}
+
 //string EAClookup(int MOD, int R_M, int W)
 //{
 //	switch (MOD) {
@@ -739,22 +774,42 @@ string immedOperands(int W)
 	}
 }
 
-string shortLabel()
+int get8bit2sComp(int rawBinary)
 {
 	int num = 0;
 	int mask = 1;
+
+	if (!(rawBinary >> 7)) {	// sign bit is positive
+		num = rawBinary;
+	}
+	for (int i = 0; i < 7; ++i) {
+		num += (rawBinary & mask);
+		mask <<= 1;
+	}
+	num -= 128;
+
+	return num;
+}
+
+string shortLabel()
+{
+	int num = 0;
+	//int mask = 1;
 	int data = readNumBits(8);
 
-	if (!(data >> 7)) {	// sign bit is positive
-		num = data;
-	}
-	else {	// get 2's complement signed (negative) value
-		for (int i = 0; i < 7; ++i) {	// extract seven rightmost bits
-			num += (data & mask);
-			mask <<= 1;
-		}
-		num -= 128;
-	}
+	// REFACTOR THIS INTO THE ACTUAL IMMED8 DECODING FUNCTION
+	num = get8bit2sComp(data);
+	//if (!(data >> 7)) {	// sign bit is positive
+	//	num = data;
+	//}
+	//else {	// get 2's complement signed (negative) value
+	//	num = get8bit2sComp(data);
+	//	//for (int i = 0; i < 7; ++i) {	// extract seven rightmost bits
+	//	//	num += (data & mask);
+	//	//	mask <<= 1;
+	//	//}
+	//	//num -= 128;
+	//}
 
 	return intToHexStr(num + IP + 2, 16);		// add an extra two to account for the IP moving past this instruction as well
 }
@@ -777,7 +832,44 @@ string shortLabel()
 //	}
 //}
 
+string multiImmedOperands(int opcode)
+{
+	// 80 instrs are REG8/MEM8,IMMED8
+	// 81 instrs are REG16/MEM16,IMMED16
+	// 82 instrs are REG8/MEM8,IMMED8
+	// 83 instrs are REG16/MEM16,IMMED8
+	// in all cases, going from IMMED into REG/MEM
 
+	string outputStr;
+
+	int opExtend = readNumBits(3);
+	int reg = readNumBits(3);
+
+	outputStr += opExtendLookup(opExtend);
+
+	switch (opcode) {
+		case 0x80:
+		case 0x82:
+			outputStr += registerLookup(reg, 0);	// 8 bit register
+			outputStr += intToHexStr(readNumBits(8), 8);
+			//outputStr += immedOperands(0);
+			break;
+		case 0x81:
+			outputStr += registerLookup(reg, 1);
+			readNumBits(8);
+			outputStr += get8bit2sComp(readNumBits(8));
+			//outputStr += immedOperands(1);
+			break;
+		case 0x83:
+			outputStr += registerLookup(reg, 1);
+			outputStr += immedOperands(0);
+			break;
+	}
+
+
+
+	return "HI";
+}
 
 string decodeInstr(int byte, int segOverride)
 {
