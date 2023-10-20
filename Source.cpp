@@ -284,7 +284,7 @@ void printInstruction(int byte, int segOverride)
 			cout << instr.data << shortLabel() << endl;
 			break;
 		case MULTI_IMMED8:
-			cout << instr.data << multiImmedOperands(byte) << endl;
+			cout << multiImmedOperands(byte) << endl;
 			break;
 
 	}
@@ -842,33 +842,39 @@ string multiImmedOperands(int opcode)
 
 	string outputStr;
 
+	int mod = readNumBits(2);
 	int opExtend = readNumBits(3);
-	int reg = readNumBits(3);
+	int r_m = readNumBits(3);
+	//int reg = readNumBits(3);
 
 	outputStr += opExtendLookup(opExtend);
 
 	switch (opcode) {
 		case 0x80:
 		case 0x82:
-			outputStr += registerLookup(reg, 0);	// 8 bit register
-			outputStr += intToHexStr(readNumBits(8), 8);
+			outputStr += EAClookup(mod, r_m, 0);
+			//outputStr += registerLookup(reg, 0);	// 8 bit register
+			outputStr += "," + intToHexStr(readNumBits(8), 8);
 			//outputStr += immedOperands(0);
 			break;
 		case 0x81:
-			outputStr += registerLookup(reg, 1);
-			readNumBits(8);
-			outputStr += get8bit2sComp(readNumBits(8));
+			outputStr += EAClookup(mod, r_m, 1);
+			//outputStr += registerLookup(reg, 1);
+			readNumBits(8);		// can just skip these bits; not needed to get 8 bit 2s complement
+			outputStr += "," + get8bit2sComp(readNumBits(8));
 			//outputStr += immedOperands(1);
 			break;
 		case 0x83:
-			outputStr += registerLookup(reg, 1);
-			outputStr += immedOperands(0);
+			outputStr += EAClookup(mod, r_m, 1);
+			//outputStr += registerLookup(reg, 1);
+			//outputStr += immedOperands(0);
+			outputStr += "," + intToHexStr(readNumBits(8), 8);
 			break;
 	}
 
 
 
-	return "HI";
+	return outputStr;
 }
 
 string decodeInstr(int byte, int segOverride)
