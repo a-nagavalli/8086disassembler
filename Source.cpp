@@ -350,10 +350,10 @@ const Instruction instrs[256] {
 
 int main()
 {
-	file.open("inputFile.txt", ios::in | ios::out);
+	file.open("ExampleArithmeticBinary.txt", ios::in | ios::out);
 
 	if (!file) {
-		std::cout << "Error: readFile: file \"" << "inputFile.txt" << "\" could not be opened" << endl;
+		std::cout << "Error: readFile: file \"" << "ExampleArithmeticBinary.txt" << "\" could not be opened" << endl;
 		return -1;
 	}
 	
@@ -363,6 +363,8 @@ int main()
 		printInstruction(byte);
 	}
 
+	cout << "\nPress Enter to close..." << endl;
+	cin.get();
 	return 0;
 }
 
