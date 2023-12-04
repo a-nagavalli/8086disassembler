@@ -363,6 +363,7 @@ int main()
 		printInstruction(byte);
 	}
 
+	file.close();
 	cout << "\nPress Enter to close..." << endl;
 	cin.get();
 	return 0;
