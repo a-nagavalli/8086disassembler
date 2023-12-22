@@ -36,11 +36,11 @@ string multiIncOperands(int opcode);
 
 enum opModes {
 	NO_OP_ENC,
-	REG_MEM_8_0,	
+	REG_MEM_8_0,
 	REG_MEM_16_0,
 	REG_MEM_8_1,
 	REG_MEM_16_1,
-	REG_MEM_8_ONLY,	
+	REG_MEM_8_ONLY,
 	REG_MEM_16_ONLY,
 	AL_IMMED8,
 	AX_IMMED8,
@@ -49,9 +49,9 @@ enum opModes {
 	IMMED16_TO_REG,
 	SHORT_LABEL,
 	MULTI_IMMED8,
-	SEGREG_0,	
-	SEGREG_1,	
-	EXCHANGE,	
+	SEGREG_0,
+	SEGREG_1,
+	EXCHANGE,
 	XCHG,
 	NEAR_LABEL,
 	FAR_LABEL,
@@ -89,8 +89,8 @@ struct Instruction {
 };
 
 // all 8086 instructions
-const Instruction instrs[256] {
-	{"ADD\t", REG_MEM_8_0},		
+const Instruction instrs[256]{
+	{"ADD\t", REG_MEM_8_0},
 	{"ADD\t", REG_MEM_16_0},
 	{"ADD\t", REG_MEM_8_1},
 	{"ADD\t", REG_MEM_16_1},
@@ -218,22 +218,22 @@ const Instruction instrs[256] {
 	{"JNL\t", SHORT_LABEL},
 	{"JLE\t", SHORT_LABEL},
 	{"JNLE\t", SHORT_LABEL},
-	{"MULTI\t", MULTI_IMMED8},	
-	{"MULTI\t", MULTI_IMMED8},	
-	{"MULTI\t", MULTI_IMMED8},	
-	{"MULTI\t", MULTI_IMMED8},	
+	{"MULTI\t", MULTI_IMMED8},
+	{"MULTI\t", MULTI_IMMED8},
+	{"MULTI\t", MULTI_IMMED8},
+	{"MULTI\t", MULTI_IMMED8},
 	{"TEST\t", REG_MEM_8_0},
 	{"TEST\t", REG_MEM_16_0},
 	{"XCHG\t", REG_MEM_8_0},
 	{"XCHG\t", REG_MEM_16_0},
 	{"MOV\t", REG_MEM_8_0},
-	{"MOV\t", REG_MEM_16_0},	
+	{"MOV\t", REG_MEM_16_0},
 	{"MOV\t", REG_MEM_8_1},
 	{"MOV\t", REG_MEM_16_1},
 	{"MOV\t", SEGREG_0},			// NEED TO IMPLEMENT
-	{"LEA\t", REG_MEM_16_1},	
+	{"LEA\t", REG_MEM_16_1},
 	{"MOV\t", SEGREG_1},			// NEED TO IMPLEMENT
-	{"POP\t", REG_MEM_16_1},	
+	{"POP\t", REG_MEM_16_1},
 	{"NOP\t", EXCHANGE},
 	{"XCHG\t", XCHG},
 	{"XCHG\t", XCHG},
@@ -268,12 +268,12 @@ const Instruction instrs[256] {
 	{"SCAS\t", DEST_STR_16},		// NEED TO IMPLEMENT
 	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED8_TO_REG},
-	{"MOV\t", IMMED8_TO_REG},		
 	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED8_TO_REG},
+	{"MOV\t", IMMED8_TO_REG},
 	{"MOV\t", IMMED16_TO_REG},
 	{"MOV\t", IMMED16_TO_REG},
 	{"MOV\t", IMMED16_TO_REG},
@@ -281,17 +281,17 @@ const Instruction instrs[256] {
 	{"MOV\t", IMMED16_TO_REG},
 	{"MOV\t", IMMED16_TO_REG},
 	{"MOV\t", IMMED16_TO_REG},
-	{"MOV\t", IMMED16_TO_REG},		
+	{"MOV\t", IMMED16_TO_REG},
 	{"**NOT USED**", NO_OP_ENC},
 	{"**NOT USED**", NO_OP_ENC},
 	{"RET\t", IMMED16},
-	{"RET\t", NO_OP_ENC},		
-	{"LES\t", REG_MEM_16_1},	
-	{"LDS\t", REG_MEM_16_1},	
+	{"RET\t", NO_OP_ENC},
+	{"LES\t", REG_MEM_16_1},
+	{"LDS\t", REG_MEM_16_1},
 	{"MOV\t", IMMED8_TO_MEM8},		// NEED TO IMPLEMENT
 	{"MOV\t", IMMED16_TO_MEM16},	// NEED TO IMPLEMENT
-	{"**NOT USED**", NO_OP_ENC},	
-	{"**NOT USED**", NO_OP_ENC},	
+	{"**NOT USED**", NO_OP_ENC},
+	{"**NOT USED**", NO_OP_ENC},
 	{"RET\t", IMMED16},
 	{"RET\t", NO_OP_ENC},
 	{"INT\t3", NO_OP_ENC},
@@ -302,8 +302,8 @@ const Instruction instrs[256] {
 	{"MULTI", MULTI_ROR},
 	{"MULTI", MULTI_ROR},
 	{"MULTI", MULTI_ROR},
-	{"AAM", AA_SKIP},				
-	{"AAD", NO_OP_ENC},	
+	{"AAM", AA_SKIP},
+	{"AAD", NO_OP_ENC},
 	{"**NOT USED**", NO_OP_ENC},
 	{"XLAT", SOURCE_TABLE},			// NEED TO IMPLEMENT
 	{"MULTI", OPCODE_SOURCE},		// NEED TO IMPLEMENT
@@ -314,10 +314,10 @@ const Instruction instrs[256] {
 	{"MULTI", OPCODE_SOURCE},		// NEED TO IMPLEMENT
 	{"MULTI", OPCODE_SOURCE},		// NEED TO IMPLEMENT
 	{"MULTI", OPCODE_SOURCE},		// NEED TO IMPLEMENT
-	{"LOOPNE\t", SHORT_LABEL},		
-	{"LOOPE\t", SHORT_LABEL},	
+	{"LOOPNE\t", SHORT_LABEL},
+	{"LOOPE\t", SHORT_LABEL},
 	{"LOOP\t", SHORT_LABEL},
-	{"JCXZ\t", SHORT_LABEL},	
+	{"JCXZ\t", SHORT_LABEL},
 	{"IN\t", AL_IMMED8},
 	{"IN\t", AX_IMMED8},
 	{"OUT\t", AL_IMMED8},
@@ -356,7 +356,7 @@ int main()
 		std::cout << "Error: readFile: file \"" << "ExampleArithmeticBinary.txt" << "\" could not be opened" << endl;
 		return -1;
 	}
-	
+
 	// reads entire file
 	int byte = 0;
 	while ((byte = readNumBits(8)) >= 0) {
@@ -455,42 +455,42 @@ string registerLookup(int reg, int W)
 {
 	if (W == 0) {
 		switch (reg) {
-			case 0b000:
-				return "AL";
-			case 0b001:
-				return "CL";
-			case 0b010:
-				return "DL";
-			case 0b011:
-				return "BL";
-			case 0b100:
-				return "AH";
-			case 0b101:
-				return "CH";
-			case 0b110:
-				return "DH";
-			case 0b111:
-				return "BH";
+		case 0b000:
+			return "AL";
+		case 0b001:
+			return "CL";
+		case 0b010:
+			return "DL";
+		case 0b011:
+			return "BL";
+		case 0b100:
+			return "AH";
+		case 0b101:
+			return "CH";
+		case 0b110:
+			return "DH";
+		case 0b111:
+			return "BH";
 		}
 	}
 	if (W == 1) {
 		switch (reg) {
-			case 0b000:
-				return "AX";
-			case 0b001:
-				return "CX";
-			case 0b010:
-				return "DX";
-			case 0b011:
-				return "BX";
-			case 0b100:
-				return "SP";
-			case 0b101:
-				return "BP";
-			case 0b110:
-				return "SI";
-			case 0b111:
-				return "DI";
+		case 0b000:
+			return "AX";
+		case 0b001:
+			return "CX";
+		case 0b010:
+			return "DX";
+		case 0b011:
+			return "BX";
+		case 0b100:
+			return "SP";
+		case 0b101:
+			return "BP";
+		case 0b110:
+			return "SI";
+		case 0b111:
+			return "DI";
 		}
 	}
 
@@ -504,118 +504,118 @@ string EAClookup(int MOD, int R_M, int W, int segOverride)
 	string output = "";
 
 	switch (segOverride) {
-		case SS:
-			output += "SS:";
-			break;
-		case DS:
-			output += "DS:";
-			break;
-		case CS:
-			output += "CS:";
-			break;
-		case ES:
-			output += "ES:";
-			break;
+	case SS:
+		output += "SS:";
+		break;
+	case DS:
+		output += "DS:";
+		break;
+	case CS:
+		output += "CS:";
+		break;
+	case ES:
+		output += "ES:";
+		break;
 	}
 
 	switch (MOD) {
-		case 0b00:		// MOD == 00; no displacement
-			switch (R_M) {
-				case 0b000:
-					output += "[BX+SI]";
-					break;
-				case 0b001:
-					output += "[BX+DI]";
-					break;
-				case 0b010:
-					output += "[BP+SI]";
-					break;
-				case 0b011:
-					output += "[BP+DI]";
-					break;
-				case 0b100:
-					output += "[SI]";
-					break;
-				case 0b101:
-					output += "[DI]";
-					break;
-				case 0b110: {
-					int d16 = readNumBits(16);
-					output += "[" + intToHexStr(d16, 16) + "]";
-					break;
-				}
-				case 0b111:
-					output += "[BX]";
-					break;
-			}
-			break;	
-		case 0b01: {	// MOD == 01; 8-bit displacement
-			int d8 = readNumBits(8);
-			int comp = get8bit2sComp(d8);
-
-			switch (R_M) {
-				case 0b000:
-					output += "[BX+SI+" + intToHexStr(d8, 8) + "]";		
-					break;
-				case 0b001:
-					output += "[BX+DI+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b010:
-					output += "[BP+SI+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b011:
-					output += "[BP+DI+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b100:
-					output += "[SI+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b101:
-					output += "[DI+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b110:
-					output += "[BP+" + intToHexStr(d8, 8) + "]";
-					break;
-				case 0b111:
-					output += "[BX+" + intToHexStr(d8, 8) + "]";
-					break;
-			}
+	case 0b00:		// MOD == 00; no displacement
+		switch (R_M) {
+		case 0b000:
+			output += "[BX+SI]";
 			break;
-		}
-		case 0b10: {	// MOD == 10; 16-bit displacement
+		case 0b001:
+			output += "[BX+DI]";
+			break;
+		case 0b010:
+			output += "[BP+SI]";
+			break;
+		case 0b011:
+			output += "[BP+DI]";
+			break;
+		case 0b100:
+			output += "[SI]";
+			break;
+		case 0b101:
+			output += "[DI]";
+			break;
+		case 0b110: {
 			int d16 = readNumBits(16);
-			switch (R_M) {
-				case 0b000:
-					output += "[BX+SI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b001:
-					output += "[BX+DI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b010:
-					output += "[BP+SI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b011:
-					output += "[BP+DI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b100:
-					output += "[SI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b101:
-					output += "[DI+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b110:
-					output += "[BP+" + intToHexStr(d16, 16) + "]";
-					break;
-				case 0b111:
-					output += "[BX+" + intToHexStr(d16, 16) + "]";
-					break;
-			}
+			output += "[" + intToHexStr(d16, 16) + "]";
 			break;
 		}
-		case 0b11:		// MOD == 11; register mode (no displacement)
-			output += registerLookup(R_M, W);
+		case 0b111:
+			output += "[BX]";
 			break;
+		}
+		break;
+	case 0b01: {	// MOD == 01; 8-bit displacement
+		int d8 = readNumBits(8);
+		int comp = get8bit2sComp(d8);
+
+		switch (R_M) {
+		case 0b000:
+			output += "[BX+SI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b001:
+			output += "[BX+DI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b010:
+			output += "[BP+SI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b011:
+			output += "[BP+DI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b100:
+			output += "[SI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b101:
+			output += "[DI+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b110:
+			output += "[BP+" + intToHexStr(d8, 8) + "]";
+			break;
+		case 0b111:
+			output += "[BX+" + intToHexStr(d8, 8) + "]";
+			break;
+		}
+		break;
 	}
-	
+	case 0b10: {	// MOD == 10; 16-bit displacement
+		int d16 = readNumBits(16);
+		switch (R_M) {
+		case 0b000:
+			output += "[BX+SI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b001:
+			output += "[BX+DI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b010:
+			output += "[BP+SI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b011:
+			output += "[BP+DI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b100:
+			output += "[SI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b101:
+			output += "[DI+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b110:
+			output += "[BP+" + intToHexStr(d16, 16) + "]";
+			break;
+		case 0b111:
+			output += "[BX+" + intToHexStr(d16, 16) + "]";
+			break;
+		}
+		break;
+	}
+	case 0b11:		// MOD == 11; register mode (no displacement)
+		output += registerLookup(R_M, W);
+		break;
+	}
+
 	if (!output.empty())
 		return output;
 
@@ -626,24 +626,24 @@ string EAClookup(int MOD, int R_M, int W, int segOverride)
 string opExtendLookup(int opExtend)
 {
 	switch (opExtend) {
-		case 0b000:
-			return "ADD\t";
-		case 0b001:
-			return "OR\t";
-		case 0b010:
-			return "ADC\t";
-		case 0b011:
-			return "SBB\t";
-		case 0b100:
-			return "AND\t";
-		case 0b101:
-			return "SUB\t";
-		case 0b110:
-			return "XOR\t";
-		case 0b111:
-			return "CMP\t";
-		default:
-			return "OP_EXTEND NOT RECOGNIZED: opExtendLookup()";
+	case 0b000:
+		return "ADD\t";
+	case 0b001:
+		return "OR\t";
+	case 0b010:
+		return "ADC\t";
+	case 0b011:
+		return "SBB\t";
+	case 0b100:
+		return "AND\t";
+	case 0b101:
+		return "SUB\t";
+	case 0b110:
+		return "XOR\t";
+	case 0b111:
+		return "CMP\t";
+	default:
+		return "OP_EXTEND NOT RECOGNIZED: opExtendLookup()";
 	}
 }
 
@@ -682,8 +682,8 @@ string regMemOperands(int W, int D, int segOverride)
 }
 
 // encoding function
-string immedData(int W)	
-{	
+string immedData(int W)
+{
 	if (W)
 		return intToHexStr(readNumBits(16), 16);
 	return intToHexStr(readNumBits(8), 8);
@@ -749,37 +749,37 @@ string multiIncOperands(int opcode)
 	int r_m = readNumBits(3);
 
 	switch (opcode) {
-		case 0xFE:
-			switch (opExtend) {
-				case 0b000:
-					outputStr += "INC\t" + EAClookup(mod, r_m, 0);
-					break;
-				case 0b001:
-					outputStr += "DEC\t" + EAClookup(mod, r_m, 0);
-					break;
-			}
+	case 0xFE:
+		switch (opExtend) {
+		case 0b000:
+			outputStr += "INC\t" + EAClookup(mod, r_m, 0);
 			break;
-		case 0xFF:
-			switch (opExtend) {
-				case 0b000:
-					outputStr += "INC\t" + EAClookup(mod, r_m, 1);
-					break;
-				case 0b001:
-					outputStr += "DEC\t" + EAClookup(mod, r_m, 1);
-					break;
-				case 0b010:
-				case 0b011:
-					outputStr += "CALL\t" + EAClookup(mod, r_m, 1);
-					break;
-				case 0b100:
-				case 0b101:
-					outputStr += "JMP\t" + EAClookup(mod, r_m, 1);
-					break;
-				case 0b110:
-					outputStr += "PUSH\t" + EAClookup(mod, r_m, 1);
-					break;
-			}
+		case 0b001:
+			outputStr += "DEC\t" + EAClookup(mod, r_m, 0);
 			break;
+		}
+		break;
+	case 0xFF:
+		switch (opExtend) {
+		case 0b000:
+			outputStr += "INC\t" + EAClookup(mod, r_m, 1);
+			break;
+		case 0b001:
+			outputStr += "DEC\t" + EAClookup(mod, r_m, 1);
+			break;
+		case 0b010:
+		case 0b011:
+			outputStr += "CALL\t" + EAClookup(mod, r_m, 1);
+			break;
+		case 0b100:
+		case 0b101:
+			outputStr += "JMP\t" + EAClookup(mod, r_m, 1);
+			break;
+		case 0b110:
+			outputStr += "PUSH\t" + EAClookup(mod, r_m, 1);
+			break;
+		}
+		break;
 	}
 
 	return outputStr;
@@ -789,24 +789,24 @@ string multiIncOperands(int opcode)
 string testExtendLookup(int op)
 {
 	switch (op) {
-		case 0b000:
-			return "TEST\t";
-		case 0b001:
-			return "NOT USED\t";
-		case 0b010:
-			return "NOT\t";
-		case 0b011:
-			return "NEG\t";
-		case 0b100:
-			return "MUL\t";
-		case 0b101:
-			return "IMUL\t";
-		case 0b110:
-			return "DIV\t";
-		case 0b111:
-			return "IDIV\t";
-		default:
-			return "OP_EXTEND NOT RECOGNIZED: testExtendLookup()";
+	case 0b000:
+		return "TEST\t";
+	case 0b001:
+		return "NOT USED\t";
+	case 0b010:
+		return "NOT\t";
+	case 0b011:
+		return "NEG\t";
+	case 0b100:
+		return "MUL\t";
+	case 0b101:
+		return "IMUL\t";
+	case 0b110:
+		return "DIV\t";
+	case 0b111:
+		return "IDIV\t";
+	default:
+		return "OP_EXTEND NOT RECOGNIZED: testExtendLookup()";
 	}
 }
 
@@ -823,24 +823,24 @@ string multiTestOperands(int opcode)
 
 	if (outputStr == "TEST\t") {
 		switch (opcode) {
-			case 0xF6:
-				outputStr += EAClookup(mod, r_m, 0);
-				outputStr += "," + immedData(0);
-				return outputStr;
-			case 0xF7:
-				outputStr += EAClookup(mod, r_m, 1);
-				outputStr += "," + immedData(1);
-				return outputStr;
+		case 0xF6:
+			outputStr += EAClookup(mod, r_m, 0);
+			outputStr += "," + immedData(0);
+			return outputStr;
+		case 0xF7:
+			outputStr += EAClookup(mod, r_m, 1);
+			outputStr += "," + immedData(1);
+			return outputStr;
 		}
 	}
 
 	switch (opcode) {
-		case 0xF6:
-			outputStr += EAClookup(mod, r_m, 0);
-			break;
-		case 0xF7:
-			outputStr += EAClookup(mod, r_m, 1);
-			break;
+	case 0xF6:
+		outputStr += EAClookup(mod, r_m, 0);
+		break;
+	case 0xF7:
+		outputStr += EAClookup(mod, r_m, 1);
+		break;
 	}
 
 	return outputStr;
@@ -850,24 +850,24 @@ string multiTestOperands(int opcode)
 string rotateExtendLookup(int op)
 {
 	switch (op) {
-		case 0b000:
-			return "ROL\t";
-		case 0b001:
-			return "ROR\t";
-		case 0b010:
-			return "RCL\t";
-		case 0b011:
-			return "RCR\t";
-		case 0b100:
-			return "SAL\t";
-		case 0b101:
-			return "SHR\t";
-		case 0b110:
-			return "NOT USED\t";
-		case 0b111:
-			return "SAR\t";
-		default:
-			return "OP_EXTEND NOT RECOGNIZED: rotateExtendLookup()";
+	case 0b000:
+		return "ROL\t";
+	case 0b001:
+		return "ROR\t";
+	case 0b010:
+		return "RCL\t";
+	case 0b011:
+		return "RCR\t";
+	case 0b100:
+		return "SAL\t";
+	case 0b101:
+		return "SHR\t";
+	case 0b110:
+		return "NOT USED\t";
+	case 0b111:
+		return "SAR\t";
+	default:
+		return "OP_EXTEND NOT RECOGNIZED: rotateExtendLookup()";
 	}
 }
 
@@ -883,18 +883,18 @@ string multiRotateOperands(int opcode)
 	outputStr += rotateExtendLookup(opExtend);
 
 	switch (opcode) {
-		case 0xD0:
-			outputStr += EAClookup(mod, r_m, 0) + ",1";
-			break;
-		case 0xD1:
-			outputStr += EAClookup(mod, r_m, 1) + ",1";
-			break;
-		case 0xD2:
-			outputStr += EAClookup(mod, r_m, 0) + ",CL";
-			break;
-		case 0xD3:
-			outputStr += EAClookup(mod, r_m, 1) + ",CL";
-			break;
+	case 0xD0:
+		outputStr += EAClookup(mod, r_m, 0) + ",1";
+		break;
+	case 0xD1:
+		outputStr += EAClookup(mod, r_m, 1) + ",1";
+		break;
+	case 0xD2:
+		outputStr += EAClookup(mod, r_m, 0) + ",CL";
+		break;
+	case 0xD3:
+		outputStr += EAClookup(mod, r_m, 1) + ",CL";
+		break;
 	}
 
 	return outputStr;
@@ -918,19 +918,19 @@ string multiImmedOperands(int opcode)
 	outputStr += opExtendLookup(opExtend);
 
 	switch (opcode) {
-		case 0x80:
-		case 0x82:
-			outputStr += EAClookup(mod, r_m, 0);	// 8 bit register
-			outputStr += "," + intToHexStr(readNumBits(8), 8);
-			break;
-		case 0x81:
-			outputStr += EAClookup(mod, r_m, 1);	// 16 bit register
-			outputStr += "," + intToHexStr(readNumBits(16), 16);
-			break;
-		case 0x83:
-			outputStr += EAClookup(mod, r_m, 1);
-			outputStr += "," + intToHexStr(readNumBits(8), 8);
-			break;
+	case 0x80:
+	case 0x82:
+		outputStr += EAClookup(mod, r_m, 0);	// 8 bit register
+		outputStr += "," + intToHexStr(readNumBits(8), 8);
+		break;
+	case 0x81:
+		outputStr += EAClookup(mod, r_m, 1);	// 16 bit register
+		outputStr += "," + intToHexStr(readNumBits(16), 16);
+		break;
+	case 0x83:
+		outputStr += EAClookup(mod, r_m, 1);
+		outputStr += "," + intToHexStr(readNumBits(8), 8);
+		break;
 	}
 
 	return outputStr;
